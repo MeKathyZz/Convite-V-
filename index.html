@@ -4,9 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Convite Especial</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="convite/style.css">
+  <title>Interactive Event</title>
+  <link rel="stylesheet" href="convite/assets/css/style.css">
 </head>
 
 <body>
@@ -23,7 +22,7 @@
 
       <p class="titulo ouro-brilhante" id="titulo-principal">
         <span class="estrela-girando">✨</span>
-        <span class="texto-titulo">VOCÊ ESTÁ CONVIDADO</span>
+        <span class="texto-titulo">Interactive-Event v2.0</span>
         <span class="estrela-girando">✨</span>
       </p>
 
@@ -33,56 +32,36 @@
 
       <div id="texto"></div>
 
-      <div id="final-frase" class="final hidden">
-        <p class="ouro-brilhante">DE PERTO <span>OU DE CORAÇÃO</span></p>
-      </div>
-
       <div id="acao" class="hidden">
         <div class="bloco-input">
           <input type="text" id="nome" placeholder="Nome e sobrenome" autocapitalize="words">
-          <button onclick="confirmar()">Confirmar Presença</button>
+          <button onclick="confirmar()">Registrar marca</button>
         </div>
       </div>
 
     </div>
 
-    <div class="convite-box fechado" id="box-lista-inicial" onclick="abrirListaConfirmados()">
-      <p class="titulo ouro-brilhante" style="font-size: 18px;">
-        👥 VER QUEM JÁ CONFIRMOU
-      </p>
-    </div>
+    <div class="convite-box hidden" id="box-agradecimento">
+        <div class="conteudo-agradecimento">
 
-    <div class="convite-box fechado hidden" id="box-agradecimento">
-      <div class="conteudo-agradecimento">
-
-        <p class="ouro-brilhante texto-final-centralizado">
-          Obrigado, <span id="nome-confirmado"></span>!<br>
-          Sua presença foi confirmada 🎉
+        <p class="ouro-brilhante texto-final-centralizado" id="nome-agradecimento"></p>
+          <p>Obrigado, <span id="nome-confirmado"></span>!<br>
+          Sua marca está no BDD! 🎉
         </p>
 
-        <div class="pergunta-novo" id="pergunta-bloco">
-          <span>Quer confirmar mais alguém?</span>
-          <div class="botoes-lado-a-lado">
-            <button onclick="mostrarNovoInput()" class="btn-pequeno">Sim</button>
-            <button onclick="voltarAoInicio()" class="btn-pequeno btn-escuro">Não</button>
-          </div>
-        </div>
+        <button id="btn-ver-lista" class="btn-lista">
+            Veja quem já passou por aqui
+        </button>
 
-        <div id="novo-registro" class="hidden bloco-input-interno">
-          <input type="text" id="nome-novo" placeholder="Nome e sobrenome da outra pessoa" autocapitalize="words">
-          <button onclick="confirmarNovo()">Confirmar Presença</button>
-        </div>
       </div>
-
     </div>
-
   </div>
 
   <div id="modal-lista" class="hidden overlay-lista">
     <div class="convite-box aberto">
       <p class="titulo ouro-brilhante">
         <span class="estrela-girando">✨</span>
-        QUEM JÁ CONFIRMOU
+        QUEM JÁ PASSOU AQUI
         (<span id="contador-total">...</span>)
         <span class="estrela-girando">✨</span>
       </p>
@@ -93,15 +72,15 @@
         <p style="color: #fff; text-align: center;">Carregando lista...</p>
       </div>
 
-      <button onclick="fecharListaConfirmados()" class="btn-pequeno">Fechar</button>
+      <button onclick="voltarAoInicio()" class="btn-pequeno">Fechar</button>
     </div>
   </div>
 
-  <audio id="typingSound" src="convite/typing.mp3" preload="auto"></audio>
-  <audio id="musicaFundo" src="convite/stars.mp3" preload="auto" loop></audio>
+  <audio id="typingSound" src="convite/assets/audio/typing.mp3" preload="auto"></audio>
+  <audio id="musicaFundo" src="convite/assets/audio/stars.mp3" preload="auto" loop></audio>
 
-  <script src="convite/stars.js"></script>
-  <script src="convite/script.js"></script>
+  <script src="convite/assets/js/stars.js"></script>
+  <script src="convite/assets/js/script.js"></script>
 
 </body>
 

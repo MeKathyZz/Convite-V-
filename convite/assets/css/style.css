@@ -70,8 +70,16 @@ body {
 .convite-box.aberto {
   justify-content: flex-start;
   padding: 30px 25px;
-  overflow-y: hidden;
+  max-height: 70vh;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  height: auto;
   transition: background-color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+#box-agradecimento {
+    padding: 20px !important;
+    min-height: auto !important; 
 }
 
 #box-agradecimento.aberto {
@@ -80,12 +88,23 @@ body {
 }
 
 .conteudo-agradecimento {
-  width: 100%;
+  text-align: center;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   gap: 15px;
-  animation: subirSuave 1s ease-out forwards;
+}
+
+.conteudo-agradecimento p {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.conteudo-agradecimento p:nth-of-type(2) {
+    font-size: 1.3rem !important; 
+    margin-bottom: 25px;
 }
 
 .titulo {
@@ -97,8 +116,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center !important;
-  text-indent: 0 !important;
+  text-align: center;
+  text-indent: 0;
   white-space: normal;
   flex-wrap: wrap;
   gap: 5px;
@@ -106,15 +125,6 @@ body {
 
 .fechado .titulo {
   font-size: clamp(16px, 5.5vw, 32px);
-  padding: 0 10px;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 12px;
 }
 
 .texto-titulo {
@@ -132,6 +142,7 @@ body {
 .aberto .titulo {
   justify-content: center;
   gap: 5px;
+  font-size: 25px;
 }
 
 #texto {
@@ -144,39 +155,51 @@ body {
   line-height: 1.6;
   font-size: clamp(14px, 2.5vw, 18px);
   margin: 15px 0;
-  overflow-x: hidden;
 }
 
 .btn-lista {
   background: transparent;
   border: 1px solid #d1a04f;
   color: #d1a04f;
-  margin-top: 15px;
-  padding: 12px 20px;
-  font-size: 14px;
+  margin-top: auto;
+  padding: 12px 24px;
+  font-size: 1rem;
+  max-width: 90%;
+  align-self: center;
   border-radius: 30px;
   text-transform: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
+#btn-ver-lista {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #d1a04f, #fcf6ba);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+#btn-ver-lista:hover{
+  transform: scale(1.05);
+}
+
 .btn-lista:active {
-  transform: scale(0.95);
-  background: rgba(209, 160, 79, 0.1);
+  transform: scale(0.98);
 }
 
 .overlay-lista {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.9);
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   animation: subirSuave 0.5s ease-out forwards;
 }
 
@@ -207,6 +230,13 @@ body {
   border-radius: 10px;
 }
 
+#nome-confirmado {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
 #contador-total {
     color: #ffd700;
     font-weight: bold;
@@ -215,24 +245,15 @@ body {
 }
 
 .texto-final-centralizado {
-  text-align: center !important;
-  text-indent: 0 !important;
-  font-size: clamp(16px, 3vw, 22px) !important;
+  text-align: center;
+  text-indent: 0;
+  font-size: clamp(16px, 3vw, 22px);
   font-weight: bold;
-  margin-top: 25px !important;
-}
-
-#box-agradecimento p.texto-final-centralizado {
-  font-size: clamp(20px, 4vw, 28px) !important;
-  margin: 0 0 15px 0 !important;
-  line-height: 1.3;
 }
 
 .ouro-brilhante {
-  color: #DAA520 !important;
-  -webkit-text-fill-color: #DAA520 !important;
-  background: none !important;
-  text-shadow: 0 0 3px #FFD700, 0 0 8px rgba(218, 165, 32, 0.6);
+  color: #DAA520;
+  text-shadow: 0 0 3px #DAA520, 0 0 8px #fcf6ba;
 }
 
 .hidden {
@@ -248,25 +269,16 @@ body {
   animation: subirSuave 1.2s ease-out forwards;
 }
 
-.bloco-input {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
 input {
   width: 100%;
+  max-width: 400px;
   padding: 12px;
+  margin-bottom: 15px;
   border-radius: 10px;
   border: 1px solid rgba(255, 215, 0, 0.4);
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   text-align: center;
-  font-size: 16px;
 }
 
 button {
@@ -287,38 +299,6 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
-}
-
-.pergunta-novo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
-  font-family: 'Georgia', serif;
-  color: #f5f5f5;
-  font-size: 16px;
-  transition: opacity 0.5s ease;
-}
-
-button.btn-pequeno {
-  padding: 8px 20px;
-  font-size: 14px;
-  border-radius: 20px;
-  margin: 0;
-}
-
-.bloco-input-interno {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  margin-top: 10px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 215, 0, 0.2);
-  animation: subirSuave 0.6s ease-out forwards;
 }
 
 .setinha {
@@ -345,57 +325,13 @@ button.btn-pequeno {
   flex-shrink: 0;
 }
 
-@keyframes girarEstrela {
-  from {
-    transform: rotate(0deg);
-  }
+@keyframes girarEstrela { from { transform: rotate(0deg);} to { transform: rotate(360deg);}}
 
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0);}  40% { transform: translateY(-10px);}}
 
-@keyframes bounce {
+@keyframes subirSuave { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);}}
 
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes subirSuave {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 480px) {
-  .fechado .titulo {
-    display: block !important;
-    font-size: clamp(16px, 5.5vw, 24px) !important;
-    text-align: center !important;
-  }
-
-  .fechado .titulo .estrela-girando,
-  .fechado .titulo .texto-titulo {
-    display: block !important;
-    margin: 8px auto !important;
-    width: fit-content;
-  }
-}
+@media (max-width: 480px) { .fechado .titulo { flex-direction: column; gap: 8px;}}
 
 .btn-pular {
   position: absolute;
@@ -434,24 +370,6 @@ button.btn-pequeno {
 
 #box-lista-inicial:active {
   transform: scale(0.98);
-}
-
-.botoes-lado-a-lado {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.btn-escuro {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 215, 0, 0.4) !important;
-  color: #FFD700 !important;
-}
-
-.btn-escuro:hover {
-  background: rgba(255, 215, 0, 0.2) !important;
 }
 
 .legenda-ordem {

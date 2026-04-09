@@ -1,46 +1,56 @@
+require('dotenv').config();
+const { createClient } = require('@supabase/supabase-js');
 const express = require('express');
 const cors = require('cors');
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const app = express();
 
 // Middleware
-app.use(cors()); // Libera o acesso para o seu frontend
-app.use(express.json()); // Permite que o Node leia dados em formato JSON
+app.use(cors());
+app.use(express.json());
 
-// Banco de dados temporário na memória do servidor
-let listaConfirmados = [];
-
-// 📥 ROTA 1: Recebe a confirmação do site (POST)
-app.post('/confirmar', (req, res) => {
+// 📥 ROUT 1: Receive the confirmation from the website (POST)
+app.post('/confirmar', async (req, res) => {
     const { nome } = req.body;
 
     if (!nome) {
         return res.status(400).json({ erro: "Nome é obrigatório!" });
     }
 
-    const novoConvidado = {
-        id: listaConfirmados.length + 1,
-        nome: nome,
-        dataHora: new Date().toLocaleString('pt-BR')
-    };
+    const { data, error } = await supabase
+        .from('Confirmados')
+        .insert([{ nome: nome}]);
 
-    listaConfirmados.push(novoConvidado);
+    if (error) {
+        console.error("Erro ao salvar no Supabase:", error);
+        return res.status(500).json({ erro: "Erro ao salvar no banco de dados." });
+    }
 
-    console.log(`✅ Nova presença confirmada: ${nome}`);
-    
     res.status(201).json({ 
         sucesso: true, 
-        mensagem: "Presença confirmada no banco de dados!" 
-    });
+        mensagem: "Presença salva com sucesso no banco de dados!" 
+        });
+
 });
 
-// 📤 ROTA 2: Mostra a lista de quem já confirmou (GET)
-app.get('/lista', (req, res) => {
-    res.json(listaConfirmados);
+// 📤 ROUT 2: Show a list of confirmed people (GET)
+app.get('/lista', async (req, res) => {
+    const { data, error } = await supabase
+        .from('Confirmados')
+        .select('*');
+
+    if (error) { return res.status(400).json({erro: error.message});}    
+    
+    res.json(data);
 });
 
-// Inicia o servidor na porta 3000
+// Start the server on port 3000
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 Backend rodando liso em http://localhost:${PORT}`);
-    console.log(`📋 Veja a lista de confirmados em http://localhost:${PORT}/lista`);
+    console.log(`🚀 Backend on fire on http://localhost:${PORT}`);
+    console.log(`📋 See the list on http://localhost:${PORT}/lista`);
 });
